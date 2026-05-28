@@ -1,0 +1,16 @@
+name: compact-multimodal-smoke
+model: qwen2_5_vl
+model_args:
+  pretrained: Qwen/Qwen2.5-VL-3B-Instruct
+tasks:
+  - mme
+  - textvqa_val_lite
+  - videomme
+batch_size: 1
+limit: 8
+output_path: outputs/compact-multimodal-smoke
+tags:
+  - image
+  - video
+  - compact
+notes: Small suite manifest intended for quick end-to-end evaluation checks.
