@@ -38,6 +38,14 @@ Render the exact lmms-eval command without loading a model:
 mm-eval-workbench plan suites/compact-multimodal-smoke.yaml
 ```
 
+Search and validate the bundled benchmark catalog without initializing Torch or
+loading model weights:
+
+```bash
+mm-eval-workbench catalog videomme
+mm-eval-workbench validate suites/compact-multimodal-smoke.yaml
+```
+
 The underlying evaluator remains `lmms_eval` and its existing task/model code.
 
 ## Repository shape
