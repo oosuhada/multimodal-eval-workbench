@@ -7,8 +7,10 @@ import json
 from pathlib import Path
 
 from .catalog import missing_tasks, search_tasks
+from .ledger import EvalRunLedger, execute_plan
 from .manifest import SuiteManifest
 from .planner import build_plan
+from .report import summarize_result_file
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -28,6 +30,18 @@ def _parser() -> argparse.ArgumentParser:
     validate = subparsers.add_parser("validate", help="Check whether suite task names exist in the bundled task catalog.")
     validate.add_argument("manifest")
     validate.add_argument("--repo-root", default=".")
+
+    run = subparsers.add_parser("run", help="Execute a suite through lmms-eval and append run provenance.")
+    run.add_argument("manifest")
+    run.add_argument("--repo-root", default=".")
+    run.add_argument("--ledger", default="artifacts/run-ledger.jsonl")
+
+    history = subparsers.add_parser("history", help="Show recent suite executions.")
+    history.add_argument("--ledger", default="artifacts/run-ledger.jsonl")
+    history.add_argument("--limit", type=int, default=20)
+
+    summarize = subparsers.add_parser("summarize", help="Extract compact scalar metrics from an lmms-eval result JSON.")
+    summarize.add_argument("result_json")
     return parser
 
 
@@ -50,6 +64,19 @@ def main() -> None:
         print(json.dumps(result, indent=2, ensure_ascii=False))
         if missing:
             raise SystemExit(2)
+    elif args.command == "run":
+        manifest = SuiteManifest.load(Path(args.manifest))
+        missing = missing_tasks(manifest.tasks, args.repo_root)
+        if missing:
+            raise SystemExit(f"Unknown suite tasks: {', '.join(missing)}")
+        plan = build_plan(manifest, args.repo_root)
+        record = execute_plan(manifest, plan, EvalRunLedger(args.ledger), cwd=args.repo_root)
+        print(json.dumps(record.as_dict(), indent=2, ensure_ascii=False))
+    elif args.command == "history":
+        records = EvalRunLedger(args.ledger).recent(args.limit)
+        print(json.dumps(records, indent=2, ensure_ascii=False))
+    elif args.command == "summarize":
+        print(json.dumps(summarize_result_file(args.result_json), indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

@@ -46,6 +46,23 @@ mm-eval-workbench catalog videomme
 mm-eval-workbench validate suites/compact-multimodal-smoke.yaml
 ```
 
+Run the same suite through the original evaluator and keep a compact provenance
+ledger outside Git history:
+
+```bash
+mm-eval-workbench run suites/compact-multimodal-smoke.yaml
+mm-eval-workbench history --limit 10
+```
+
+Turn an existing lmms-eval result JSON into a small task/metric summary:
+
+```bash
+mm-eval-workbench summarize outputs/result.json
+```
+
+The workbench does not duplicate benchmark scoring logic; it only orchestrates
+and summarizes the evaluator that is already bundled in this repository.
+
 The underlying evaluator remains `lmms_eval` and its existing task/model code.
 
 ## Repository shape
