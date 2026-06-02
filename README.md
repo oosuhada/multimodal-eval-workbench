@@ -58,6 +58,12 @@ Turn an existing lmms-eval result JSON into a small task/metric summary:
 
 ```bash
 mm-eval-workbench summarize outputs/result.json
+
+# build one suite from reusable image/video task fragments
+mm-eval-workbench compose suites/compact-composed.yaml
+
+# optionally persist the resolved suite as a normal manifest
+mm-eval-workbench compose suites/compact-composed.yaml --write artifacts/compact-composed-resolved.yaml
 ```
 
 The workbench does not duplicate benchmark scoring logic; it only orchestrates

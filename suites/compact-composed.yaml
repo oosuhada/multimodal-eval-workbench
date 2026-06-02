@@ -1,0 +1,14 @@
+name: compact-composed
+model: qwen2_5_vl
+model_args:
+  pretrained: Qwen/Qwen2.5-VL-3B-Instruct
+include:
+  - fragments/visual-core.yaml
+  - fragments/video-core.yaml
+batch_size: 1
+limit: 8
+output_path: outputs/compact-composed
+tags:
+  - smoke
+  - composed
+notes: Reuses visual and video fragments while lmms-eval remains the execution engine.

@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from .catalog import missing_tasks, search_tasks
+from .composition import compose_suite, materialize_suite
 from .ledger import EvalRunLedger, execute_plan
 from .manifest import SuiteManifest
 from .planner import build_plan
@@ -42,6 +43,11 @@ def _parser() -> argparse.ArgumentParser:
 
     summarize = subparsers.add_parser("summarize", help="Extract compact scalar metrics from an lmms-eval result JSON.")
     summarize.add_argument("result_json")
+
+    compose = subparsers.add_parser("compose", help="Combine reusable task fragments into one concrete suite.")
+    compose.add_argument("composition")
+    compose.add_argument("--repo-root", default=".")
+    compose.add_argument("--write")
     return parser
 
 
@@ -77,6 +83,18 @@ def main() -> None:
         print(json.dumps(records, indent=2, ensure_ascii=False))
     elif args.command == "summarize":
         print(json.dumps(summarize_result_file(args.result_json), indent=2, ensure_ascii=False))
+    elif args.command == "compose":
+        manifest = compose_suite(args.composition)
+        missing = missing_tasks(manifest.tasks, args.repo_root)
+        if missing:
+            raise SystemExit(f"Unknown composed tasks: {', '.join(missing)}")
+        payload = {
+            "suite": manifest.canonical_dict(),
+            "plan": build_plan(manifest, args.repo_root).as_dict(),
+        }
+        if args.write:
+            payload["written_to"] = str(materialize_suite(manifest, args.write))
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

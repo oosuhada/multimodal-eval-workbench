@@ -1,0 +1,8 @@
+name: visual-core
+tasks:
+  - mme
+  - textvqa_val_lite
+tags:
+  - image
+  - perception
+  - ocr

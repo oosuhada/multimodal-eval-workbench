@@ -1,0 +1,6 @@
+name: video-core
+tasks:
+  - videomme
+tags:
+  - video
+  - temporal
