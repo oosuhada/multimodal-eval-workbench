@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .catalog import missing_tasks, search_tasks
 from .composition import compose_suite, materialize_suite
+from .gate import gate_result_files
 from .ledger import EvalRunLedger, execute_plan
 from .manifest import SuiteManifest
 from .planner import build_plan
@@ -48,6 +49,11 @@ def _parser() -> argparse.ArgumentParser:
     compose.add_argument("composition")
     compose.add_argument("--repo-root", default=".")
     compose.add_argument("--write")
+
+    gate = subparsers.add_parser("gate", help="Fail when selected metrics regress beyond an explicit budget.")
+    gate.add_argument("baseline_json")
+    gate.add_argument("current_json")
+    gate.add_argument("--policy", required=True)
     return parser
 
 
@@ -95,6 +101,11 @@ def main() -> None:
         if args.write:
             payload["written_to"] = str(materialize_suite(manifest, args.write))
         print(json.dumps(payload, indent=2, ensure_ascii=False))
+    elif args.command == "gate":
+        result = gate_result_files(args.baseline_json, args.current_json, args.policy)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        if not result["passed"]:
+            raise SystemExit(3)
 
 
 if __name__ == "__main__":

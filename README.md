@@ -64,6 +64,9 @@ mm-eval-workbench compose suites/compact-composed.yaml
 
 # optionally persist the resolved suite as a normal manifest
 mm-eval-workbench compose suites/compact-composed.yaml --write artifacts/compact-composed-resolved.yaml
+
+# enforce explicit task/metric regression budgets against a previous result
+mm-eval-workbench gate baseline.json current.json --policy gates/compact-regression.yaml
 ```
 
 The workbench does not duplicate benchmark scoring logic; it only orchestrates

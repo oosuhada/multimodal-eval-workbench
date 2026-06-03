@@ -1,6 +1,7 @@
 from .composition import SuiteFragment, compose_suite
+from .gate import evaluate_gate, gate_result_files
 
-__all__ = ["SuiteFragment", "compose_suite"]
+__all__ = ["SuiteFragment", "compose_suite", "evaluate_gate", "gate_result_files"]
 """Suite orchestration extensions for the bundled lmms-eval codebase."""
 
 from .manifest import SuiteManifest

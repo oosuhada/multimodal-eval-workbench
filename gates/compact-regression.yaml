@@ -1,0 +1,9 @@
+checks:
+  - task: mme
+    metric: acc
+    direction: higher
+    max_regression: 0.02
+  - task: videomme
+    metric: score
+    direction: higher
+    max_regression: 1.0
