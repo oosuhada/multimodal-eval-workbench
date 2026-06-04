@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from .catalog import missing_tasks, search_tasks
+from .calibration import analyze_calibration_file
 from .composition import compose_suite, materialize_suite
 from .gate import gate_result_files
 from .ledger import EvalRunLedger, execute_plan
@@ -54,6 +55,10 @@ def _parser() -> argparse.ArgumentParser:
     gate.add_argument("baseline_json")
     gate.add_argument("current_json")
     gate.add_argument("--policy", required=True)
+
+    calibration = subparsers.add_parser("calibration", help="Measure confidence calibration and selective risk from prediction records.")
+    calibration.add_argument("predictions")
+    calibration.add_argument("--bins", type=int, default=10)
     return parser
 
 
@@ -106,6 +111,8 @@ def main() -> None:
         print(json.dumps(result, indent=2, ensure_ascii=False))
         if not result["passed"]:
             raise SystemExit(3)
+    elif args.command == "calibration":
+        print(json.dumps(analyze_calibration_file(args.predictions, bins=args.bins), indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

@@ -15,6 +15,7 @@ remains the execution engine.
 - Deterministic suite fingerprints.
 - A lightweight run ledger and result summary layer.
 - Filesystem task catalog search without importing heavyweight models.
+- Calibration, uncertainty, and selective-risk analysis.
 
 ## Quick start
 
@@ -68,6 +69,34 @@ mm-eval-workbench compose suites/compact-composed.yaml --write artifacts/compact
 # enforce explicit task/metric regression budgets against a previous result
 mm-eval-workbench gate baseline.json current.json --policy gates/compact-regression.yaml
 ```
+
+## Calibration and uncertainty
+
+For models or adapters that expose answer confidence, store predictions as
+JSONL using either a direct correctness confidence:
+
+```json
+{"confidence":0.91,"correct":true}
+{"confidence":0.88,"correct":false}
+```
+
+or a full class probability vector:
+
+```json
+{"probabilities":[0.05,0.15,0.80],"target":2}
+```
+
+Then run:
+
+```bash
+mm-eval-workbench calibration artifacts/predictions.jsonl --bins 10
+```
+
+The report includes expected/adaptive/max calibration error (ECE), Brier score,
+negative log likelihood, normalized predictive entropy, confidence on errors,
+reliability bins, area under the risk-coverage curve (AURC), and selective
+accuracy at multiple coverage levels. This separates raw benchmark accuracy
+from whether a multimodal model knows when it is likely to be wrong.
 
 The workbench does not duplicate benchmark scoring logic; it only orchestrates
 and summarizes the evaluator that is already bundled in this repository.
