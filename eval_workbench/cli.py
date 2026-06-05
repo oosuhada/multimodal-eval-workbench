@@ -14,6 +14,7 @@ from .ledger import EvalRunLedger, execute_plan
 from .manifest import SuiteManifest
 from .planner import build_plan
 from .report import summarize_result_file
+from .temperature import temperature_scale_file
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -59,6 +60,14 @@ def _parser() -> argparse.ArgumentParser:
     calibration = subparsers.add_parser("calibration", help="Measure confidence calibration and selective risk from prediction records.")
     calibration.add_argument("predictions")
     calibration.add_argument("--bins", type=int, default=10)
+
+    temperature = subparsers.add_parser("temperature-scale", help="Fit scalar temperature scaling on held-out classifier logits.")
+    temperature.add_argument("logits")
+    temperature.add_argument("--bins", type=int, default=10)
+    temperature.add_argument("--min-temperature", type=float, default=0.05)
+    temperature.add_argument("--max-temperature", type=float, default=10.0)
+    temperature.add_argument("--iterations", type=int, default=80)
+    temperature.add_argument("--write-probabilities")
     return parser
 
 
@@ -113,6 +122,16 @@ def main() -> None:
             raise SystemExit(3)
     elif args.command == "calibration":
         print(json.dumps(analyze_calibration_file(args.predictions, bins=args.bins), indent=2, ensure_ascii=False))
+    elif args.command == "temperature-scale":
+        result = temperature_scale_file(
+            args.logits,
+            bins=args.bins,
+            min_temperature=args.min_temperature,
+            max_temperature=args.max_temperature,
+            iterations=args.iterations,
+            write_probabilities=args.write_probabilities,
+        )
+        print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

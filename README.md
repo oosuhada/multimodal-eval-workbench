@@ -98,6 +98,27 @@ reliability bins, area under the risk-coverage curve (AURC), and selective
 accuracy at multiple coverage levels. This separates raw benchmark accuracy
 from whether a multimodal model knows when it is likely to be wrong.
 
+### Post-hoc temperature scaling
+
+On a **held-out calibration split**, save classifier scores as logits:
+
+```json
+{"logits":[3.2,0.7,-1.1],"target":0}
+{"logits":[2.8,1.4,0.2],"target":1}
+```
+
+Fit a single positive temperature by minimizing multiclass NLL:
+
+```bash
+mm-eval-workbench temperature-scale artifacts/calibration-logits.jsonl \
+  --write-probabilities artifacts/calibrated.jsonl
+```
+
+The command reports calibration metrics before/after scaling plus the fitted
+temperature and changes in NLL, ECE, and Brier score. The optimizer is a small
+bounded one-dimensional search, so it adds no training-framework dependency and
+does not retrain the underlying multimodal model.
+
 The workbench does not duplicate benchmark scoring logic; it only orchestrates
 and summarizes the evaluator that is already bundled in this repository.
 
