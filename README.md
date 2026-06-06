@@ -119,6 +119,25 @@ temperature and changes in NLL, ECE, and Brier score. The optimizer is a small
 bounded one-dimensional search, so it adds no training-framework dependency and
 does not retrain the underlying multimodal model.
 
+## OOD / corruption robustness profiles
+
+Once the same suite has been evaluated on clean and shifted inputs, aggregate
+the degradation using the same task/metric direction definitions already used
+by regression gates:
+
+```bash
+mm-eval-workbench robustness clean.json \
+  --condition blur=blur.json \
+  --condition noise=noise.json \
+  --condition low-light=low-light.json \
+  --policy gates/compact-regression.yaml
+```
+
+The profile reports per-metric absolute and relative regression, retention,
+worst corruption, per-condition mean/worst regression, and overall worst-case
+robustness. This keeps clean accuracy separate from distribution-shift
+reliability and is ready to consume future corruption-generated benchmark runs.
+
 The workbench does not duplicate benchmark scoring logic; it only orchestrates
 and summarizes the evaluator that is already bundled in this repository.
 

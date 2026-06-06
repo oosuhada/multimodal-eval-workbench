@@ -5,6 +5,7 @@ from .composition import SuiteFragment, compose_suite
 from .gate import evaluate_gate, gate_result_files
 from .manifest import SuiteManifest
 from .planner import SuitePlan, build_plan
+from .robustness import evaluate_robustness, robustness_from_files
 from .temperature import fit_temperature, temperature_report
 from .catalog import TaskEntry, missing_tasks, search_tasks
 
@@ -19,9 +20,11 @@ __all__ = [
     "build_plan",
     "compose_suite",
     "evaluate_gate",
+    "evaluate_robustness",
     "fit_temperature",
     "gate_result_files",
     "missing_tasks",
     "search_tasks",
+    "robustness_from_files",
     "temperature_report",
 ]

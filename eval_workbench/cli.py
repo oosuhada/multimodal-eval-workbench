@@ -14,6 +14,7 @@ from .ledger import EvalRunLedger, execute_plan
 from .manifest import SuiteManifest
 from .planner import build_plan
 from .report import summarize_result_file
+from .robustness import parse_condition_args, robustness_from_files
 from .temperature import temperature_scale_file
 
 
@@ -68,6 +69,11 @@ def _parser() -> argparse.ArgumentParser:
     temperature.add_argument("--max-temperature", type=float, default=10.0)
     temperature.add_argument("--iterations", type=int, default=80)
     temperature.add_argument("--write-probabilities")
+
+    robustness = subparsers.add_parser("robustness", help="Profile clean-to-OOD metric degradation across corruption/shift conditions.")
+    robustness.add_argument("baseline_json")
+    robustness.add_argument("--condition", action="append", default=[], help="Condition result as name=path; repeat for multiple shifts.")
+    robustness.add_argument("--policy", required=True, help="Reuse gate policy task/metric/direction definitions.")
     return parser
 
 
@@ -132,6 +138,9 @@ def main() -> None:
             write_probabilities=args.write_probabilities,
         )
         print(json.dumps(result, indent=2, ensure_ascii=False))
+    elif args.command == "robustness":
+        conditions = parse_condition_args(args.condition)
+        print(json.dumps(robustness_from_files(args.baseline_json, conditions, args.policy), indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":
