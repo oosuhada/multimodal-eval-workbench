@@ -10,6 +10,7 @@ from .catalog import missing_tasks, search_tasks
 from .calibration import analyze_calibration_file
 from .composition import compose_suite, materialize_suite
 from .gate import gate_result_files
+from .failure_slices import discover_failure_slices_file
 from .ledger import EvalRunLedger, execute_plan
 from .manifest import SuiteManifest
 from .planner import build_plan
@@ -74,6 +75,15 @@ def _parser() -> argparse.ArgumentParser:
     robustness.add_argument("baseline_json")
     robustness.add_argument("--condition", action="append", default=[], help="Condition result as name=path; repeat for multiple shifts.")
     robustness.add_argument("--policy", required=True, help="Reuse gate policy task/metric/direction definitions.")
+
+    failure_slices = subparsers.add_parser("failure-slices", help="Cluster failed samples in embedding space and discover recurring slices.")
+    failure_slices.add_argument("failures")
+    failure_slices.add_argument("--clusters", type=int)
+    failure_slices.add_argument("--max-clusters", type=int, default=8)
+    failure_slices.add_argument("--pca-dims", type=int, default=32)
+    failure_slices.add_argument("--representatives", type=int, default=3)
+    failure_slices.add_argument("--seed", type=int, default=42)
+    failure_slices.add_argument("--write-assignments")
     return parser
 
 
@@ -141,6 +151,16 @@ def main() -> None:
     elif args.command == "robustness":
         conditions = parse_condition_args(args.condition)
         print(json.dumps(robustness_from_files(args.baseline_json, conditions, args.policy), indent=2, ensure_ascii=False))
+    elif args.command == "failure-slices":
+        print(json.dumps(discover_failure_slices_file(
+            args.failures,
+            clusters=args.clusters,
+            max_clusters=args.max_clusters,
+            pca_dims=args.pca_dims,
+            representatives=args.representatives,
+            seed=args.seed,
+            write_assignments=args.write_assignments,
+        ), indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

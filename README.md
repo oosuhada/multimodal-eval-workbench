@@ -68,7 +68,17 @@ mm-eval-workbench compose suites/compact-composed.yaml --write artifacts/compact
 
 # enforce explicit task/metric regression budgets against a previous result
 mm-eval-workbench gate baseline.json current.json --policy gates/compact-regression.yaml
+
+# cluster failed samples from saved embeddings into recurring failure slices
+mm-eval-workbench failure-slices failures.jsonl --max-clusters 8
 ```
+
+Failure slice discovery L2-normalizes sample embeddings, optionally reduces
+them with PCA, selects K with silhouette score, then reports cluster prevalence,
+dominant tasks/error tags, mean confidence, and centroid-nearest representative
+failures. This turns a flat error list into data-driven OCR, temporal, counting,
+reasoning, or other recurring failure groups without requiring manual labels for
+the clustering itself.
 
 ## Calibration and uncertainty
 
