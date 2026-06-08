@@ -1,0 +1,6 @@
+name: example-base
+clean_result: ../outputs/base-clean.json
+calibration_predictions: ../outputs/base-predictions.jsonl
+conditions:
+  blur: ../outputs/base-blur.json
+  noise: ../outputs/base-noise.json

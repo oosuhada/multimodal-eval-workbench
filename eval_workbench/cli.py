@@ -11,6 +11,7 @@ from .calibration import analyze_calibration_file
 from .composition import compose_suite, materialize_suite
 from .gate import gate_result_files
 from .failure_slices import discover_failure_slices_file
+from .experiment_compare import compare_evaluation_profiles
 from .ledger import EvalRunLedger, execute_plan
 from .manifest import SuiteManifest
 from .planner import build_plan
@@ -84,6 +85,12 @@ def _parser() -> argparse.ArgumentParser:
     failure_slices.add_argument("--representatives", type=int, default=3)
     failure_slices.add_argument("--seed", type=int, default=42)
     failure_slices.add_argument("--write-assignments")
+
+    compare = subparsers.add_parser("compare-experiments", help="Compare clean accuracy, OOD retention, and calibration for two model revisions.")
+    compare.add_argument("baseline_profile")
+    compare.add_argument("current_profile")
+    compare.add_argument("--policy", required=True)
+    compare.add_argument("--bins", type=int, default=10)
     return parser
 
 
@@ -160,6 +167,13 @@ def main() -> None:
             representatives=args.representatives,
             seed=args.seed,
             write_assignments=args.write_assignments,
+        ), indent=2, ensure_ascii=False))
+    elif args.command == "compare-experiments":
+        print(json.dumps(compare_evaluation_profiles(
+            args.baseline_profile,
+            args.current_profile,
+            args.policy,
+            bins=args.bins,
         ), indent=2, ensure_ascii=False))
 
 

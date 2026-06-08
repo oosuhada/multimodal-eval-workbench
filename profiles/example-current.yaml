@@ -1,0 +1,6 @@
+name: example-current
+clean_result: ../outputs/current-clean.json
+calibration_predictions: ../outputs/current-predictions.jsonl
+conditions:
+  blur: ../outputs/current-blur.json
+  noise: ../outputs/current-noise.json

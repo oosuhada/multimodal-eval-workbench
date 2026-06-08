@@ -71,6 +71,10 @@ mm-eval-workbench gate baseline.json current.json --policy gates/compact-regress
 
 # cluster failed samples from saved embeddings into recurring failure slices
 mm-eval-workbench failure-slices failures.jsonl --max-clusters 8
+
+# reveal clean/OOD/calibration trade-offs between two model revisions
+mm-eval-workbench compare-experiments profiles/base.yaml profiles/current.yaml \
+  --policy gates/compact-regression.yaml
 ```
 
 Failure slice discovery L2-normalizes sample embeddings, optionally reduces
@@ -79,6 +83,13 @@ dominant tasks/error tags, mean confidence, and centroid-nearest representative
 failures. This turns a flat error list into data-driven OCR, temporal, counting,
 reasoning, or other recurring failure groups without requiring manual labels for
 the clustering itself.
+
+Evaluation profiles can bind a clean lmms-eval result, confidence predictions,
+and any number of matched corruption/OOD condition results. `compare-experiments`
+then produces one scorecard covering directional clean-metric change, ECE/NLL
+change, and OOD retention change. This makes improvements that trade clean
+accuracy for worse calibration or robustness visible instead of collapsing the
+research decision into one benchmark number.
 
 ## Calibration and uncertainty
 
