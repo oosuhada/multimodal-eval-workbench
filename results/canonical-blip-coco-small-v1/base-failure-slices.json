@@ -1,0 +1,59 @@
+{
+  "analysis_dimensions": 256,
+  "assignments": [
+    {
+      "cluster": 0,
+      "id": "base:coco-val2017-000000255664",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 0,
+      "id": "base:coco-val2017-000000170278",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    }
+  ],
+  "cluster_count": 1,
+  "embedding_dimensions": 256,
+  "failure_count": 2,
+  "inertia": 0.5061423746221525,
+  "pca_explained_variance": null,
+  "silhouette": null,
+  "silhouette_by_k": {},
+  "slices": [
+    {
+      "cluster": 0,
+      "fraction": 1.0,
+      "mean_confidence": 0.20979434251785278,
+      "name": "blip_coco_image_to_text / dog_to_dog",
+      "representatives": [
+        {
+          "confidence": 0.2540499269962311,
+          "error": "dog_to_dog",
+          "id": "base:coco-val2017-000000255664",
+          "task": "blip_coco_image_to_text"
+        },
+        {
+          "confidence": 0.1655387580394745,
+          "error": "dog_to_dog",
+          "id": "base:coco-val2017-000000170278",
+          "task": "blip_coco_image_to_text"
+        }
+      ],
+      "size": 2,
+      "top_errors": [
+        {
+          "count": 2,
+          "fraction": 1.0,
+          "value": "dog_to_dog"
+        }
+      ],
+      "top_tasks": [
+        {
+          "count": 2,
+          "fraction": 1.0,
+          "value": "blip_coco_image_to_text"
+        }
+      ]
+    }
+  ]
+}

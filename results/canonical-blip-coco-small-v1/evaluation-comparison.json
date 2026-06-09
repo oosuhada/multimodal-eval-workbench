@@ -1,0 +1,38 @@
+[
+  {
+    "adaptive_ece": 0.637064150068909,
+    "aurc": 0.005228142341265294,
+    "brier_score": 0.44054853283203643,
+    "correctness_nll": 1.134333529829544,
+    "ece": 0.6370641500689088,
+    "failure_count": 2,
+    "retrieval_mean_r_at_1": 0.95625,
+    "retrieval_nll": 1.1683986857533455,
+    "top1_calibration_accuracy": 0.975,
+    "variant": "base"
+  },
+  {
+    "adaptive_ece": 0.6039319185540081,
+    "aurc": 0.005034724892126013,
+    "brier_score": 0.4051443207128768,
+    "correctness_nll": 1.0442831148082128,
+    "ece": 0.6059276936575771,
+    "failure_count": 3,
+    "retrieval_mean_r_at_1": 0.9375,
+    "retrieval_nll": 1.108654472231865,
+    "top1_calibration_accuracy": 0.9625,
+    "variant": "lora-r8"
+  },
+  {
+    "adaptive_ece": 0.5891172884032131,
+    "aurc": 0.005071825348747018,
+    "brier_score": 0.3879441795610884,
+    "correctness_nll": 1.004610171150992,
+    "ece": 0.5912217879667879,
+    "failure_count": 3,
+    "retrieval_mean_r_at_1": 0.9437500000000001,
+    "retrieval_nll": 1.0673409659415483,
+    "top1_calibration_accuracy": 0.9625,
+    "variant": "lora-r16"
+  }
+]

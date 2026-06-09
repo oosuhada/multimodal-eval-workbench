@@ -1,0 +1,175 @@
+{
+  "analysis_dimensions": 4,
+  "assignments": [
+    {
+      "cluster": 0,
+      "id": "base:coco-val2017-000000255664",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 0,
+      "id": "lora-r8:coco-val2017-000000255664",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 0,
+      "id": "lora-r16:coco-val2017-000000255664",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 1,
+      "id": "base:coco-val2017-000000170278",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 1,
+      "id": "lora-r8:coco-val2017-000000170278",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 1,
+      "id": "lora-r16:coco-val2017-000000170278",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 2,
+      "id": "lora-r8:coco-val2017-000000095862",
+      "slice": "blip_coco_image_to_text / person_to_person"
+    },
+    {
+      "cluster": 2,
+      "id": "lora-r16:coco-val2017-000000095862",
+      "slice": "blip_coco_image_to_text / person_to_person"
+    }
+  ],
+  "cluster_count": 3,
+  "embedding_dimensions": 256,
+  "failure_count": 8,
+  "inertia": 0.0019457746652317006,
+  "pca_explained_variance": 0.999976648609293,
+  "silhouette": 0.9753214277667803,
+  "silhouette_by_k": {
+    "2": 0.6161277088427277,
+    "3": 0.9753214277667803,
+    "4": 0.8416306809674385
+  },
+  "slices": [
+    {
+      "cluster": 0,
+      "fraction": 0.375,
+      "mean_confidence": 0.26905693610509235,
+      "name": "blip_coco_image_to_text / dog_to_dog",
+      "representatives": [
+        {
+          "confidence": 0.27100130915641785,
+          "error": "dog_to_dog",
+          "id": "lora-r8:coco-val2017-000000255664",
+          "task": "blip_coco_image_to_text"
+        },
+        {
+          "confidence": 0.2821195721626282,
+          "error": "dog_to_dog",
+          "id": "lora-r16:coco-val2017-000000255664",
+          "task": "blip_coco_image_to_text"
+        },
+        {
+          "confidence": 0.2540499269962311,
+          "error": "dog_to_dog",
+          "id": "base:coco-val2017-000000255664",
+          "task": "blip_coco_image_to_text"
+        }
+      ],
+      "size": 3,
+      "top_errors": [
+        {
+          "count": 3,
+          "fraction": 1.0,
+          "value": "dog_to_dog"
+        }
+      ],
+      "top_tasks": [
+        {
+          "count": 3,
+          "fraction": 1.0,
+          "value": "blip_coco_image_to_text"
+        }
+      ]
+    },
+    {
+      "cluster": 1,
+      "fraction": 0.375,
+      "mean_confidence": 0.17087230583031973,
+      "name": "blip_coco_image_to_text / dog_to_dog",
+      "representatives": [
+        {
+          "confidence": 0.17181813716888428,
+          "error": "dog_to_dog",
+          "id": "lora-r8:coco-val2017-000000170278",
+          "task": "blip_coco_image_to_text"
+        },
+        {
+          "confidence": 0.1752600222826004,
+          "error": "dog_to_dog",
+          "id": "lora-r16:coco-val2017-000000170278",
+          "task": "blip_coco_image_to_text"
+        },
+        {
+          "confidence": 0.1655387580394745,
+          "error": "dog_to_dog",
+          "id": "base:coco-val2017-000000170278",
+          "task": "blip_coco_image_to_text"
+        }
+      ],
+      "size": 3,
+      "top_errors": [
+        {
+          "count": 3,
+          "fraction": 1.0,
+          "value": "dog_to_dog"
+        }
+      ],
+      "top_tasks": [
+        {
+          "count": 3,
+          "fraction": 1.0,
+          "value": "blip_coco_image_to_text"
+        }
+      ]
+    },
+    {
+      "cluster": 2,
+      "fraction": 0.25,
+      "mean_confidence": 0.08200549334287643,
+      "name": "blip_coco_image_to_text / person_to_person",
+      "representatives": [
+        {
+          "confidence": 0.08417998254299164,
+          "error": "person_to_person",
+          "id": "lora-r16:coco-val2017-000000095862",
+          "task": "blip_coco_image_to_text"
+        },
+        {
+          "confidence": 0.07983100414276123,
+          "error": "person_to_person",
+          "id": "lora-r8:coco-val2017-000000095862",
+          "task": "blip_coco_image_to_text"
+        }
+      ],
+      "size": 2,
+      "top_errors": [
+        {
+          "count": 2,
+          "fraction": 1.0,
+          "value": "person_to_person"
+        }
+      ],
+      "top_tasks": [
+        {
+          "count": 2,
+          "fraction": 1.0,
+          "value": "blip_coco_image_to_text"
+        }
+      ]
+    }
+  ]
+}

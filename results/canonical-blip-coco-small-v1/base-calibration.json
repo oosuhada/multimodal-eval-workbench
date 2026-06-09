@@ -1,0 +1,81 @@
+{
+  "accuracy": 0.975,
+  "adaptive_ece": 0.637064150068909,
+  "aurc": 0.005228142341265294,
+  "avg_confidence": 0.33793584993109105,
+  "brier_score": 0.44054853283203643,
+  "calibration_semantics": "top-1 image-to-text retrieval correctness confidence",
+  "confidence_accuracy_gap": -0.6370641500689089,
+  "ece": 0.6370641500689088,
+  "mce": 0.9248065203428268,
+  "mean_confidence_on_correct": 0.3412215296083536,
+  "mean_confidence_on_errors": 0.20979434251785278,
+  "mean_normalized_entropy": 0.867293840383671,
+  "nll": 1.134333529829544,
+  "reliability_bins": [
+    {
+      "accuracy": 1.0,
+      "avg_confidence": 0.07519347965717316,
+      "count": 1,
+      "gap": 0.9248065203428268,
+      "lower": 0.0,
+      "upper": 0.1
+    },
+    {
+      "accuracy": 0.9166666666666666,
+      "avg_confidence": 0.15959536594649157,
+      "count": 12,
+      "gap": 0.757071300720175,
+      "lower": 0.1,
+      "upper": 0.2
+    },
+    {
+      "accuracy": 0.9523809523809523,
+      "avg_confidence": 0.2614843263512566,
+      "count": 21,
+      "gap": 0.6908966260296957,
+      "lower": 0.2,
+      "upper": 0.30000000000000004
+    },
+    {
+      "accuracy": 1.0,
+      "avg_confidence": 0.34767796293548914,
+      "count": 23,
+      "gap": 0.6523220370645109,
+      "lower": 0.30000000000000004,
+      "upper": 0.4
+    },
+    {
+      "accuracy": 1.0,
+      "avg_confidence": 0.4561786289725985,
+      "count": 14,
+      "gap": 0.5438213710274016,
+      "lower": 0.4,
+      "upper": 0.5
+    },
+    {
+      "accuracy": 1.0,
+      "avg_confidence": 0.5657507851719856,
+      "count": 8,
+      "gap": 0.4342492148280144,
+      "lower": 0.5,
+      "upper": 0.6000000000000001
+    },
+    {
+      "accuracy": 1.0,
+      "avg_confidence": 0.6442590355873108,
+      "count": 1,
+      "gap": 0.3557409644126892,
+      "lower": 0.6000000000000001,
+      "upper": 0.7000000000000001
+    }
+  ],
+  "samples": 80,
+  "selective_accuracy": {
+    "0.50": 1.0,
+    "0.80": 0.984375,
+    "0.90": 0.9722222222222222,
+    "1.00": 0.975
+  },
+  "source": "/Users/gabrieljang/development/vision-language-workbench/results/canonical-blip-coco-small-v1/base/confidence_records.jsonl"
+}

@@ -91,6 +91,31 @@ change, and OOD retention change. This makes improvements that trade clean
 accuracy for worse calibration or robustness visible instead of collapsing the
 research decision into one benchmark number.
 
+## Measured BLIP calibration and failure slices
+
+The first cross-workbench result consumes the 80 held-out confidence records
+and fused representations from Vision Language Workbench's real COCO 2017
+canonical study. Calibration here means the confidence of the top-1
+image-to-text retrieval decision; it is not a synthetic classifier fixture.
+
+| Variant | I→T accuracy | Mean retrieval R@1 | ECE | Correctness NLL | Brier | AURC | Pair failures |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Pretrained Base | 0.9750 | 0.95625 | 0.63706 | 1.13433 | 0.44055 | 0.00523 | 2 |
+| LoRA Q/V r=8 | 0.9625 | 0.93750 | 0.60593 | 1.04428 | 0.40514 | 0.00503 | 3 |
+| LoRA Q/V r=16 | 0.9625 | 0.94375 | 0.59122 | 1.00461 | 0.38794 | 0.00507 | 3 |
+
+The models are strongly under-confident in the 80-way retrieval setting. LoRA
+reduces ECE and NLL but adds one top-1 pair error, so calibration improves while
+retrieval accuracy regresses. The eight failures across variants form three
+embedding clusters: two persistent within-`dog` caption confusions and one
+`person` confusion introduced by both LoRA ranks. This also explains why the
+class probe remains perfect while exact-pair retrieval is not. OOD retention is
+not reported here because no corrupted-image run was executed in this first
+canonical pass.
+
+The measured reports and failure inputs are stored under
+[`results/canonical-blip-coco-small-v1`](results/canonical-blip-coco-small-v1).
+
 ## Calibration and uncertainty
 
 For models or adapters that expose answer confidence, store predictions as
