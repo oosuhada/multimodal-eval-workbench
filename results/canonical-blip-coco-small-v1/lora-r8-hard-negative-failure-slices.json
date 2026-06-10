@@ -1,0 +1,59 @@
+{
+  "analysis_dimensions": 256,
+  "assignments": [
+    {
+      "cluster": 0,
+      "id": "lora-r8-hard-negative:coco-val2017-000000255664",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    },
+    {
+      "cluster": 0,
+      "id": "lora-r8-hard-negative:coco-val2017-000000170278",
+      "slice": "blip_coco_image_to_text / dog_to_dog"
+    }
+  ],
+  "cluster_count": 1,
+  "embedding_dimensions": 256,
+  "failure_count": 2,
+  "inertia": 0.520668931647953,
+  "pca_explained_variance": null,
+  "silhouette": null,
+  "silhouette_by_k": {},
+  "slices": [
+    {
+      "cluster": 0,
+      "fraction": 1.0,
+      "mean_confidence": 0.22108950465917587,
+      "name": "blip_coco_image_to_text / dog_to_dog",
+      "representatives": [
+        {
+          "confidence": 0.2711731493473053,
+          "error": "dog_to_dog",
+          "id": "lora-r8-hard-negative:coco-val2017-000000255664",
+          "task": "blip_coco_image_to_text"
+        },
+        {
+          "confidence": 0.17100585997104645,
+          "error": "dog_to_dog",
+          "id": "lora-r8-hard-negative:coco-val2017-000000170278",
+          "task": "blip_coco_image_to_text"
+        }
+      ],
+      "size": 2,
+      "top_errors": [
+        {
+          "count": 2,
+          "fraction": 1.0,
+          "value": "dog_to_dog"
+        }
+      ],
+      "top_tasks": [
+        {
+          "count": 2,
+          "fraction": 1.0,
+          "value": "blip_coco_image_to_text"
+        }
+      ]
+    }
+  ]
+}

@@ -12,6 +12,6 @@ decision; `retrieval_nll` in `evaluation-comparison.json` is the separate
 80-way target-caption NLL produced by the model experiment.
 
 Failure slicing uses the matching 256-dimensional fused representation. The
-failure count is small (2 Base, 3 r=8, 3 r=16), so the clusters are exploratory
-rather than population-level claims. No OOD/corruption result is included in
-this directory.
+failure count is small (2 Base, 3 r=8, 3 r=16, 2 r=8 + hard negative), so the
+three combined clusters are exploratory rather than population-level claims.
+No OOD/corruption result is included in this directory.

@@ -103,10 +103,13 @@ image-to-text retrieval decision; it is not a synthetic classifier fixture.
 | Pretrained Base | 0.9750 | 0.95625 | 0.63706 | 1.13433 | 0.44055 | 0.00523 | 2 |
 | LoRA Q/V r=8 | 0.9625 | 0.93750 | 0.60593 | 1.04428 | 0.40514 | 0.00503 | 3 |
 | LoRA Q/V r=16 | 0.9625 | 0.94375 | 0.59122 | 1.00461 | 0.38794 | 0.00507 | 3 |
+| LoRA Q/V r=8 + mined hard negative | 0.9750 | 0.95000 | 0.61704 | 1.07672 | 0.41641 | 0.00509 | 2 |
 
 The models are strongly under-confident in the 80-way retrieval setting. LoRA
 reduces ECE and NLL but adds one top-1 pair error, so calibration improves while
-retrieval accuracy regresses. The eight failures across variants form three
+retrieval accuracy regresses. Mined negatives restore Base's image-to-text
+accuracy and improve ECE versus Base, while mean bidirectional R@1 remains
+0.00625 lower. The ten failures across four variants form three
 embedding clusters: two persistent within-`dog` caption confusions and one
 `person` confusion introduced by both LoRA ranks. This also explains why the
 class probe remains perfect while exact-pair retrieval is not. OOD retention is

@@ -34,5 +34,17 @@
     "retrieval_nll": 1.0673409659415483,
     "top1_calibration_accuracy": 0.9625,
     "variant": "lora-r16"
+  },
+  {
+    "adaptive_ece": 0.6170373238623142,
+    "aurc": 0.0050868082254593465,
+    "brier_score": 0.4164144998668428,
+    "correctness_nll": 1.0767185611215815,
+    "ece": 0.6170373238623141,
+    "failure_count": 2,
+    "retrieval_mean_r_at_1": 0.95,
+    "retrieval_nll": 1.1096513617783785,
+    "top1_calibration_accuracy": 0.975,
+    "variant": "lora-r8-hard-negative"
   }
 ]
