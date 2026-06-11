@@ -112,9 +112,23 @@ accuracy and improve ECE versus Base, while mean bidirectional R@1 remains
 0.00625 lower. The ten failures across four variants form three
 embedding clusters: two persistent within-`dog` caption confusions and one
 `person` confusion introduced by both LoRA ranks. This also explains why the
-class probe remains perfect while exact-pair retrieval is not. OOD retention is
-not reported here because no corrupted-image run was executed in this first
-canonical pass.
+class probe remains perfect while exact-pair retrieval is not.
+
+The exact saved adapters were also evaluated over Gaussian blur/noise, JPEG,
+low light, and occlusion at severity 1–3. The integrated scorecard is:
+
+| Variant | Params % | Clean R@1 | Mean OOD R@1 | OOD retention | ECE | Correctness NLL | CKA | Probe |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Base | 0.0000% | 0.95625 | 0.91625 | 0.95817 | 0.63706 | 1.13433 | 1.000000 | 1.00000 |
+| LoRA r=8 | 0.1318% | 0.93750 | 0.91250 | 0.97333 | 0.60593 | 1.04428 | 0.999953 | 1.00000 |
+| LoRA r=16 | 0.2636% | 0.94375 | 0.91458 | 0.96909 | 0.59122 | 1.00461 | 0.999850 | 1.00000 |
+| LoRA r=8 + hard negative | 0.1318% | 0.95000 | 0.91542 | 0.96360 | 0.61704 | 1.07672 | 0.999956 | 1.00000 |
+
+Base keeps the highest absolute clean and mean OOD R@1. Ordinary LoRA improves
+relative OOD retention and calibration but does so from a lower clean score;
+mined negatives recover most of the clean/OOD gap while retaining some of the
+calibration improvement. Severity-3 occlusion is the worst condition for every
+variant.
 
 The measured reports and failure inputs are stored under
 [`results/canonical-blip-coco-small-v1`](results/canonical-blip-coco-small-v1).

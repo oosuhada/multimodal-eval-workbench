@@ -1,0 +1,54 @@
+[
+  {
+    "clean_r_at_1": 0.95625,
+    "gaussian_blur_mean_retention": 0.9738562091503268,
+    "gaussian_noise_mean_retention": 0.9891067538126362,
+    "jpeg_compression_mean_retention": 0.9760348583877995,
+    "low_light_mean_retention": 0.9847494553376905,
+    "mean_ood_r_at_1": 0.9162499999999999,
+    "mean_retention": 0.958169934640523,
+    "occlusion_mean_retention": 0.8671023965141611,
+    "variant": "base",
+    "worst_condition": "occlusion:s3",
+    "worst_retention": 0.7843137254901961
+  },
+  {
+    "clean_r_at_1": 0.9375,
+    "gaussian_blur_mean_retention": 0.991111111111111,
+    "gaussian_noise_mean_retention": 1.0022222222222221,
+    "jpeg_compression_mean_retention": 0.9911111111111112,
+    "low_light_mean_retention": 1.0,
+    "mean_ood_r_at_1": 0.9125,
+    "mean_retention": 0.9733333333333334,
+    "occlusion_mean_retention": 0.8822222222222221,
+    "variant": "lora-r8",
+    "worst_condition": "occlusion:s3",
+    "worst_retention": 0.8
+  },
+  {
+    "clean_r_at_1": 0.9437500000000001,
+    "gaussian_blur_mean_retention": 0.9845474613686532,
+    "gaussian_noise_mean_retention": 0.9977924944812361,
+    "jpeg_compression_mean_retention": 0.9867549668874172,
+    "low_light_mean_retention": 0.9933774834437085,
+    "mean_ood_r_at_1": 0.9145833333333333,
+    "mean_retention": 0.9690949227373068,
+    "occlusion_mean_retention": 0.8830022075055187,
+    "variant": "lora-r16",
+    "worst_condition": "occlusion:s3",
+    "worst_retention": 0.8079470198675496
+  },
+  {
+    "clean_r_at_1": 0.95,
+    "gaussian_blur_mean_retention": 0.9824561403508772,
+    "gaussian_noise_mean_retention": 0.9934210526315791,
+    "jpeg_compression_mean_retention": 0.9780701754385966,
+    "low_light_mean_retention": 0.9912280701754387,
+    "mean_ood_r_at_1": 0.9154166666666667,
+    "mean_retention": 0.9635964912280701,
+    "occlusion_mean_retention": 0.8728070175438596,
+    "variant": "lora-r8-hard-negative",
+    "worst_condition": "occlusion:s3",
+    "worst_retention": 0.7894736842105263
+  }
+]

@@ -14,4 +14,9 @@ decision; `retrieval_nll` in `evaluation-comparison.json` is the separate
 Failure slicing uses the matching 256-dimensional fused representation. The
 failure count is small (2 Base, 3 r=8, 3 r=16, 2 r=8 + hard negative), so the
 three combined clusters are exploratory rather than population-level claims.
-No OOD/corruption result is included in this directory.
+
+`integrated-scorecard.{json,csv,md}` joins trainable-parameter cost, clean and
+15-condition OOD retrieval, top-1 calibration, CKA, cosine drift, geometry, and
+linear-probe results. `ood/` stores the exact-checkpoint summary and provenance
+copied from Vision Language Workbench commit
+`984106906c1f443057a4d5c0d77e6766bcce6f58`.

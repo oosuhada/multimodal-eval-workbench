@@ -1,0 +1,14 @@
+{
+  "adapters": {
+    "lora-r16": "/content/canonical-blip-coco-small-v1/adapters/lora-r16/adapter_model.pt",
+    "lora-r8": "/content/canonical-blip-coco-small-v1/adapters/lora-r8/adapter_model.pt",
+    "lora-r8-hard-negative": "/content/canonical-blip-coco-hard-negative-v1/adapters/lora-r8-hard-negative/adapter_model.pt"
+  },
+  "condition_count_per_variant": 15,
+  "dtype": "torch.bfloat16",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "model_id": "Salesforce/blip-itm-base-coco",
+  "model_revision": "98cf803d8586e8e8b3ec527885ac50c422d514ae",
+  "probe_samples": 80,
+  "utc_timestamp": "2026-08-26T00:06:03.495313+00:00"
+}
