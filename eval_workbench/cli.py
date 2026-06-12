@@ -18,6 +18,7 @@ from .planner import build_plan
 from .report import summarize_result_file
 from .robustness import parse_condition_args, robustness_from_files
 from .temperature import temperature_scale_file
+from .decision_analysis import analyze_scorecard_file, render_markdown
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -91,6 +92,11 @@ def _parser() -> argparse.ArgumentParser:
     compare.add_argument("current_profile")
     compare.add_argument("--policy", required=True)
     compare.add_argument("--bins", type=int, default=10)
+
+    decision = subparsers.add_parser("decision-analysis", help="Find objective winners and the Pareto frontier of an integrated scorecard.")
+    decision.add_argument("scorecard_json")
+    decision.add_argument("--baseline", default="base")
+    decision.add_argument("--markdown")
     return parser
 
 
@@ -175,6 +181,12 @@ def main() -> None:
             args.policy,
             bins=args.bins,
         ), indent=2, ensure_ascii=False))
+    elif args.command == "decision-analysis":
+        result = analyze_scorecard_file(args.scorecard_json, baseline_variant=args.baseline)
+        if args.markdown:
+            Path(args.markdown).write_text(render_markdown(result), encoding="utf-8")
+            result["markdown"] = args.markdown
+        print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

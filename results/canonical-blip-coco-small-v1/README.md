@@ -20,3 +20,26 @@ three combined clusters are exploratory rather than population-level claims.
 linear-probe results. `ood/` stores the exact-checkpoint summary and provenance
 copied from Vision Language Workbench commit
 `984106906c1f443057a4d5c0d77e6766bcce6f58`.
+
+## Decision analysis
+
+`decision-analysis.{json,md}` treats clean R@1, absolute OOD R@1, mean OOD
+retention, worst-case retention, ECE, correctness NLL, and trainable parameter
+cost as explicit competing objectives. All four variants remain on the Pareto
+frontier, so this study does not support a single universal winner.
+
+- Base wins clean R@1 (`0.95625`) and absolute mean OOD R@1 (`0.91625`).
+- LoRA r=8 wins mean OOD retention (`0.97333`).
+- LoRA r=16 wins worst-case retention (`0.80795`), ECE (`0.59122`), and
+  correctness NLL (`1.00461`).
+- LoRA r=8 + hard negative uses the same `0.1318%` trainable-parameter budget
+  as ordinary r=8 while recovering clean R@1 from `0.93750` to `0.95000` and
+  absolute OOD R@1 from `0.91250` to `0.91542`.
+
+The representation probe is saturated (`1.0` for every variant), R@5/R@10 are
+also saturated, and all CKA values remain above `0.99985`. The next study should
+therefore increase discriminative difficulty rather than add more orchestration:
+use a larger held-out retrieval pool, substantially more confusable hard
+negatives, and an occlusion-focused shift set. Multi-seed repeats are also
+needed before treating the observed calibration/retention improvements as
+population-level effects.

@@ -1,0 +1,124 @@
+{
+  "baseline": "base",
+  "objectives": {
+    "clean_mean_r_at_1": "max",
+    "ood_mean_r_at_1": "max",
+    "ood_mean_retention": "max",
+    "ood_worst_retention": "max",
+    "ece": "min",
+    "correctness_nll": "min",
+    "trainable_parameter_pct": "min"
+  },
+  "pareto_frontier": [
+    "base",
+    "lora-r8",
+    "lora-r16",
+    "lora-r8-hard-negative"
+  ],
+  "objective_winners": {
+    "clean_mean_r_at_1": {
+      "direction": "max",
+      "value": 0.95625,
+      "variants": [
+        "base"
+      ]
+    },
+    "ood_mean_r_at_1": {
+      "direction": "max",
+      "value": 0.9162499999999999,
+      "variants": [
+        "base"
+      ]
+    },
+    "ood_mean_retention": {
+      "direction": "max",
+      "value": 0.9733333333333334,
+      "variants": [
+        "lora-r8"
+      ]
+    },
+    "ood_worst_retention": {
+      "direction": "max",
+      "value": 0.8079470198675496,
+      "variants": [
+        "lora-r16"
+      ]
+    },
+    "ece": {
+      "direction": "min",
+      "value": 0.5912217879667879,
+      "variants": [
+        "lora-r16"
+      ]
+    },
+    "correctness_nll": {
+      "direction": "min",
+      "value": 1.004610171150992,
+      "variants": [
+        "lora-r16"
+      ]
+    },
+    "trainable_parameter_pct": {
+      "direction": "min",
+      "value": 0.0,
+      "variants": [
+        "base"
+      ]
+    }
+  },
+  "deltas_vs_baseline": [
+    {
+      "variant": "lora-r8",
+      "clean_mean_r_at_1_delta": -0.018750000000000044,
+      "clean_mean_r_at_1_directional_delta": -0.018750000000000044,
+      "ood_mean_r_at_1_delta": -0.00374999999999992,
+      "ood_mean_r_at_1_directional_delta": -0.00374999999999992,
+      "ood_mean_retention_delta": 0.01516339869281036,
+      "ood_mean_retention_directional_delta": 0.01516339869281036,
+      "ood_worst_retention_delta": 0.015686274509803977,
+      "ood_worst_retention_directional_delta": 0.015686274509803977,
+      "ece_delta": -0.03113645641133167,
+      "ece_directional_delta": 0.03113645641133167,
+      "correctness_nll_delta": -0.09005041502133126,
+      "correctness_nll_directional_delta": 0.09005041502133126,
+      "trainable_parameter_pct_delta": 0.1318076283325224,
+      "trainable_parameter_pct_directional_delta": -0.1318076283325224
+    },
+    {
+      "variant": "lora-r16",
+      "clean_mean_r_at_1_delta": -0.012499999999999956,
+      "clean_mean_r_at_1_directional_delta": -0.012499999999999956,
+      "ood_mean_r_at_1_delta": -0.0016666666666665941,
+      "ood_mean_r_at_1_directional_delta": -0.0016666666666665941,
+      "ood_mean_retention_delta": 0.010924988096783772,
+      "ood_mean_retention_directional_delta": 0.010924988096783772,
+      "ood_worst_retention_delta": 0.02363329437735351,
+      "ood_worst_retention_directional_delta": 0.02363329437735351,
+      "ece_delta": -0.04584236210212089,
+      "ece_directional_delta": 0.04584236210212089,
+      "correctness_nll_delta": -0.129723358678552,
+      "correctness_nll_directional_delta": 0.129723358678552,
+      "trainable_parameter_pct_delta": 0.2636152566650448,
+      "trainable_parameter_pct_directional_delta": -0.2636152566650448
+    },
+    {
+      "variant": "lora-r8-hard-negative",
+      "clean_mean_r_at_1_delta": -0.006250000000000089,
+      "clean_mean_r_at_1_directional_delta": -0.006250000000000089,
+      "ood_mean_r_at_1_delta": -0.0008333333333332416,
+      "ood_mean_r_at_1_directional_delta": -0.0008333333333332416,
+      "ood_mean_retention_delta": 0.005426556587547093,
+      "ood_mean_retention_directional_delta": 0.005426556587547093,
+      "ood_worst_retention_delta": 0.00515995872033026,
+      "ood_worst_retention_directional_delta": 0.00515995872033026,
+      "ece_delta": -0.020026826206594683,
+      "ece_directional_delta": 0.020026826206594683,
+      "correctness_nll_delta": -0.057614968707962566,
+      "correctness_nll_directional_delta": 0.057614968707962566,
+      "trainable_parameter_pct_delta": 0.1318076283325224,
+      "trainable_parameter_pct_directional_delta": -0.1318076283325224
+    }
+  ],
+  "source": "results/canonical-blip-coco-small-v1/integrated-scorecard.json",
+  "markdown": "results/canonical-blip-coco-small-v1/decision-analysis.md"
+}
