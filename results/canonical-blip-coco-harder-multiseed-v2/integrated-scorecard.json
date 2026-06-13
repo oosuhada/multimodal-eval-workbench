@@ -1,0 +1,54 @@
+[
+  {
+    "cka_vs_base": 1.0,
+    "clean_mean_r_at_1": 0.8561197916666666,
+    "correctness_nll": 1.7374357967424703,
+    "ece": 0.7261235472663733,
+    "linear_probe_accuracy": 0.7864583333333334,
+    "mean_cosine_drift": 0.0,
+    "ood_mean_r_at_1": 0.7530254289215687,
+    "ood_mean_retention": 0.8795094107698674,
+    "ood_worst_retention": 0.4102973280016736,
+    "trainable_parameter_pct": 0.0,
+    "variant": "base"
+  },
+  {
+    "cka_vs_base": 0.9994770114677191,
+    "clean_mean_r_at_1": 0.84765625,
+    "correctness_nll": 1.5221715601106276,
+    "ece": 0.676321436437623,
+    "linear_probe_accuracy": 0.7864583333333334,
+    "mean_cosine_drift": 0.0025370560973861475,
+    "ood_mean_r_at_1": 0.7496553308823529,
+    "ood_mean_retention": 0.8843144035623102,
+    "ood_worst_retention": 0.41133696838623823,
+    "trainable_parameter_pct": 0.1318076283325224,
+    "variant": "lora-r8"
+  },
+  {
+    "cka_vs_base": 0.9983705245222411,
+    "clean_mean_r_at_1": 0.8470052083333334,
+    "correctness_nll": 1.3936053989830675,
+    "ece": 0.6445909225294599,
+    "linear_probe_accuracy": 0.7864583333333334,
+    "mean_cosine_drift": 0.008515457602293112,
+    "ood_mean_r_at_1": 0.7455575980392156,
+    "ood_mean_retention": 0.880194825718456,
+    "ood_worst_retention": 0.4162010368734248,
+    "trainable_parameter_pct": 0.2636152566650448,
+    "variant": "lora-r16"
+  },
+  {
+    "cka_vs_base": 0.9995434982921705,
+    "clean_mean_r_at_1": 0.84765625,
+    "correctness_nll": 1.5374527848941433,
+    "ece": 0.6805423523813564,
+    "linear_probe_accuracy": 0.7864583333333334,
+    "mean_cosine_drift": 0.0020399471638070025,
+    "ood_mean_r_at_1": 0.7504978553921569,
+    "ood_mean_retention": 0.8853184493322902,
+    "ood_worst_retention": 0.4128380528680788,
+    "trainable_parameter_pct": 0.1318076283325224,
+    "variant": "lora-r8-hard-negative"
+  }
+]

@@ -93,6 +93,19 @@ research decision into one benchmark number.
 
 ## Measured BLIP calibration and failure slices
 
+### Harder multi-seed v2
+
+The 256-probe, three-seed follow-up reproduces the calibration direction: r8
+reduces ECE from 0.72612 to 0.67632 and r16 to 0.64459, with paired 95% CIs
+excluding zero. Base keeps the best clean R@1 (0.85612). r8 relative retention
+is directionally higher on all three seeds, but its CI crosses zero. The mined
+hard-negative variant ties ordinary r8 on clean R@1 and gains only +0.00084 OOD
+R@1; that recovery is inconclusive at n=3. Detailed calibration, OOD severity
+4–5, Pareto, and integrated scorecards are in
+[`results/canonical-blip-coco-harder-multiseed-v2`](results/canonical-blip-coco-harder-multiseed-v2).
+
+### First canonical study
+
 The first cross-workbench result consumes the 80 held-out confidence records
 and fused representations from Vision Language Workbench's real COCO 2017
 canonical study. Calibration here means the confidence of the top-1

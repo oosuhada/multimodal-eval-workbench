@@ -1,0 +1,122 @@
+{
+  "baseline": "base",
+  "deltas_vs_baseline": [
+    {
+      "clean_mean_r_at_1_delta": -0.00846354166666663,
+      "clean_mean_r_at_1_directional_delta": -0.00846354166666663,
+      "correctness_nll_delta": -0.2152642366318427,
+      "correctness_nll_directional_delta": 0.2152642366318427,
+      "ece_delta": -0.0498021108287503,
+      "ece_directional_delta": 0.0498021108287503,
+      "ood_mean_r_at_1_delta": -0.00337009803921573,
+      "ood_mean_r_at_1_directional_delta": -0.00337009803921573,
+      "ood_mean_retention_delta": 0.0048049927924427305,
+      "ood_mean_retention_directional_delta": 0.0048049927924427305,
+      "ood_worst_retention_delta": 0.0010396403845646107,
+      "ood_worst_retention_directional_delta": 0.0010396403845646107,
+      "trainable_parameter_pct_delta": 0.1318076283325224,
+      "trainable_parameter_pct_directional_delta": -0.1318076283325224,
+      "variant": "lora-r8"
+    },
+    {
+      "clean_mean_r_at_1_delta": -0.00911458333333326,
+      "clean_mean_r_at_1_directional_delta": -0.00911458333333326,
+      "correctness_nll_delta": -0.34383039775940283,
+      "correctness_nll_directional_delta": 0.34383039775940283,
+      "ece_delta": -0.08153262473691336,
+      "ece_directional_delta": 0.08153262473691336,
+      "ood_mean_r_at_1_delta": -0.007467830882353033,
+      "ood_mean_r_at_1_directional_delta": -0.007467830882353033,
+      "ood_mean_retention_delta": 0.0006854149485885364,
+      "ood_mean_retention_directional_delta": 0.0006854149485885364,
+      "ood_worst_retention_delta": 0.005903708871751179,
+      "ood_worst_retention_directional_delta": 0.005903708871751179,
+      "trainable_parameter_pct_delta": 0.2636152566650448,
+      "trainable_parameter_pct_directional_delta": -0.2636152566650448,
+      "variant": "lora-r16"
+    },
+    {
+      "clean_mean_r_at_1_delta": -0.00846354166666663,
+      "clean_mean_r_at_1_directional_delta": -0.00846354166666663,
+      "correctness_nll_delta": -0.199983011848327,
+      "correctness_nll_directional_delta": 0.199983011848327,
+      "ece_delta": -0.045581194885016885,
+      "ece_directional_delta": 0.045581194885016885,
+      "ood_mean_r_at_1_delta": -0.0025275735294117974,
+      "ood_mean_r_at_1_directional_delta": -0.0025275735294117974,
+      "ood_mean_retention_delta": 0.005809038562422764,
+      "ood_mean_retention_directional_delta": 0.005809038562422764,
+      "ood_worst_retention_delta": 0.002540724866405164,
+      "ood_worst_retention_directional_delta": 0.002540724866405164,
+      "trainable_parameter_pct_delta": 0.1318076283325224,
+      "trainable_parameter_pct_directional_delta": -0.1318076283325224,
+      "variant": "lora-r8-hard-negative"
+    }
+  ],
+  "objective_winners": {
+    "clean_mean_r_at_1": {
+      "direction": "max",
+      "value": 0.8561197916666666,
+      "variants": [
+        "base"
+      ]
+    },
+    "correctness_nll": {
+      "direction": "min",
+      "value": 1.3936053989830675,
+      "variants": [
+        "lora-r16"
+      ]
+    },
+    "ece": {
+      "direction": "min",
+      "value": 0.6445909225294599,
+      "variants": [
+        "lora-r16"
+      ]
+    },
+    "ood_mean_r_at_1": {
+      "direction": "max",
+      "value": 0.7530254289215687,
+      "variants": [
+        "base"
+      ]
+    },
+    "ood_mean_retention": {
+      "direction": "max",
+      "value": 0.8853184493322902,
+      "variants": [
+        "lora-r8-hard-negative"
+      ]
+    },
+    "ood_worst_retention": {
+      "direction": "max",
+      "value": 0.4162010368734248,
+      "variants": [
+        "lora-r16"
+      ]
+    },
+    "trainable_parameter_pct": {
+      "direction": "min",
+      "value": 0.0,
+      "variants": [
+        "base"
+      ]
+    }
+  },
+  "objectives": {
+    "clean_mean_r_at_1": "max",
+    "correctness_nll": "min",
+    "ece": "min",
+    "ood_mean_r_at_1": "max",
+    "ood_mean_retention": "max",
+    "ood_worst_retention": "max",
+    "trainable_parameter_pct": "min"
+  },
+  "pareto_frontier": [
+    "base",
+    "lora-r8",
+    "lora-r16",
+    "lora-r8-hard-negative"
+  ]
+}
