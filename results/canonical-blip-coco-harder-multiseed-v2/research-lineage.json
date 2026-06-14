@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "study_id": "canonical-blip-coco-harder-multiseed-v2",
+  "role": "downstream-evaluation",
+  "repository": "oosuhada/multimodal-eval-workbench",
+  "evaluation_commit": "1d4f784",
+  "source_experiment": {
+    "repository": "oosuhada/vision-language-workbench",
+    "commit": "f86ab7f",
+    "result_path": "results/canonical-blip-coco-harder-multiseed-v2",
+    "artifact_sha256": "5fc52a37700b83c08c7ce53bd1f361f1699a8263a78b7c902f6465ab60905867"
+  },
+  "predecessor": {
+    "study_id": "canonical-blip-coco-small-v1",
+    "source_result_path": "results/canonical-blip-coco-small-v1",
+    "evaluation_result_path": "results/canonical-blip-coco-small-v1"
+  },
+  "replication_summary": {
+    "replicated": [
+      "base_clean_retrieval_advantage",
+      "lora_calibration_improvement",
+      "representations_remain_close_to_base"
+    ],
+    "inconclusive": [
+      "lora_relative_ood_retention_improvement",
+      "high_severity_occlusion_variant_ranking"
+    ],
+    "not_replicated": [
+      "hard_negative_clean_recovery"
+    ]
+  },
+  "next_decision": {
+    "do_not_promote": "lora_or_hard_negative_variant_as_universal_replacement_for_base",
+    "retain": "base_as_absolute_clean_retrieval_reference",
+    "follow_up_priority": [
+      "increase_seed_count_for_ood_retention",
+      "test_hard_negative_effect_under_more_confusable_candidate_sets",
+      "stress_occlusion_and_localization_sensitive_slices",
+      "keep_calibration_as_a_first_class_model_selection_objective"
+    ]
+  }
+}

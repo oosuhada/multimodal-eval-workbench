@@ -42,6 +42,16 @@ calibration, and parameter objectives: no single variant dominates every
 trade-off. More seeds are warranted for OOD retention, hard-negative effects,
 and severity-4/5 occlusion; the calibration direction is already consistent.
 
+## Cross-repository lineage
+
+This directory is the downstream analysis of the measured source experiment in
+`oosuhada/vision-language-workbench`, result directory
+`results/canonical-blip-coco-harder-multiseed-v2`, source result commit
+`f86ab7f`. `research-lineage.json` records the source archive SHA-256, the v1
+predecessor, replication status for the major claims, and the next research
+decision. This keeps training evidence and evaluation conclusions connected
+without copying model weights or adapters between repositories.
+
 ## Contents
 
 - `calibration-by-seed.json` and aggregate summary JSON/CSV.
