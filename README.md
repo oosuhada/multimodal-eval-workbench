@@ -93,6 +93,38 @@ research decision into one benchmark number.
 
 ## Measured BLIP calibration and failure slices
 
+### Cross-workbench research flow
+
+The measured BLIP studies are produced in `vision-language-workbench` and then
+consumed here as evaluation evidence. The two repositories form one research
+pipeline rather than two independent demos:
+
+```text
+vision-language-workbench
+  pretrained BLIP / LoRA / hard negatives
+          ↓
+  clean + OOD + representation artifacts
+          ↓
+multimodal-eval-workbench
+  calibration + NLL + paired seed statistics
+          ↓
+  Pareto / replication analysis
+          ↓
+  next experiment decision
+```
+
+For the harder multi-seed v2 study, the source experiment was executed on a
+Google Colab `NVIDIA A100-SXM4-40GB` over seeds `42`, `1337`, and `2026`.
+`research-lineage.json` in the result directory records the source repository,
+source result commit, artifact SHA-256, predecessor study, and the conclusions
+that replicated, remained inconclusive, or failed to replicate.
+
+The v2 result is especially useful because it distinguishes a one-run effect
+from a repeatable direction: Base's clean retrieval advantage and LoRA's
+calibration improvement replicated, while the v1 hard-negative clean recovery
+did not. This is why the evaluation layer is treated as part of the experiment,
+not as a presentation-only post-processing step.
+
 ### Harder multi-seed v2
 
 The 256-probe, three-seed follow-up reproduces the calibration direction: r8
