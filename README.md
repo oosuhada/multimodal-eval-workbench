@@ -119,6 +119,13 @@ Google Colab `NVIDIA A100-SXM4-40GB` over seeds `42`, `1337`, and `2026`.
 source result commit, artifact SHA-256, predecessor study, and the conclusions
 that replicated, remained inconclusive, or failed to replicate.
 
+The human execution evidence stays with the source experiment rather than
+being duplicated into this evaluation repository. The Vision Language
+Workbench canonical result directories preserve the Colab screenshots for the
+first study and the harder v2 run, including A100 selection, active execution,
+three-seed validation/result packaging, and final runtime deletion. This repo
+keeps the derived calibration, OOD, paired-statistics, and decision artifacts.
+
 The v2 result is especially useful because it distinguishes a one-run effect
 from a repeatable direction: Base's clean retrieval advantage and LoRA's
 calibration improvement replicated, while the v1 hard-negative clean recovery
