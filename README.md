@@ -52,17 +52,15 @@ Pareto trade-offs.
 OOD stress, failure slice, Pareto trade-off를 결합해 **model decision을 위한
 근거**로 변환합니다.
 
-## Evaluation walkthrough / 프로젝트 화면
+## Evaluation workflow / 평가 워크플로
 
-This repository is also a CLI/research workbench rather than a web product.
-Its actual user-facing surfaces are benchmark plans, compact metric reports,
-failure-slice reports and integrated decision scorecards. Colab screenshots
-remain with the source training experiment instead of being duplicated here.
+This repository is organized around an evaluation workflow rather than a
+graphical product surface. Benchmark planning feeds calibration, OOD/failure
+analysis, and a final multi-objective model decision report.
 
-이 레포 역시 웹 제품이 아니라 CLI/research workbench입니다. 실제 프로젝트
-화면은 **benchmark plan, compact metric report, failure-slice report,
-integrated decision scorecard**이며, Colab 캡처는 source training experiment에
-보존하고 이 레포에서는 중복하지 않습니다.
+이 저장소는 그래픽 제품 화면이 아니라 **평가 워크플로**를 중심으로
+구성됩니다. Benchmark planning에서 시작해 calibration, OOD/failure 분석,
+최종 multi-objective model decision report로 이어집니다.
 
 ### 1. Benchmark planning / 벤치마크 계획
 
@@ -203,12 +201,23 @@ failures. This turns a flat error list into data-driven OCR, temporal, counting,
 reasoning, or other recurring failure groups without requiring manual labels for
 the clustering itself.
 
+Failure slice discovery는 sample embedding을 L2-normalize하고 필요하면 PCA로
+축소한 뒤 silhouette score로 K를 선택합니다. 이후 cluster prevalence, dominant
+task/error tag, mean confidence, centroid-nearest representative failure를
+보고해 flat error list를 OCR, temporal, counting, reasoning 등 반복되는 failure
+group으로 자동 정리합니다.
+
 Evaluation profiles can bind a clean lmms-eval result, confidence predictions,
 and any number of matched corruption/OOD condition results. `compare-experiments`
 then produces one scorecard covering directional clean-metric change, ECE/NLL
 change, and OOD retention change. This makes improvements that trade clean
 accuracy for worse calibration or robustness visible instead of collapsing the
 research decision into one benchmark number.
+
+Evaluation profile은 clean lmms-eval result, confidence prediction, 여러 matched
+corruption/OOD result를 하나로 연결합니다. `compare-experiments`는 clean metric
+변화, ECE/NLL 변화, OOD retention 변화를 하나의 scorecard로 만들어 clean
+accuracy 향상과 calibration/robustness 악화 같은 trade-off를 숨기지 않습니다.
 
 ## Measured BLIP evaluation / BLIP 실측 평가
 
@@ -242,6 +251,11 @@ Google Colab `NVIDIA A100-SXM4-40GB` over seeds `42`, `1337`, and `2026`.
 source result commit, artifact SHA-256, predecessor study, and the conclusions
 that replicated, remained inconclusive, or failed to replicate.
 
+Harder multi-seed v2 source experiment는 Google Colab
+`NVIDIA A100-SXM4-40GB`에서 seeds `42`, `1337`, `2026`으로 실행했습니다.
+`research-lineage.json`에는 source repo/commit, artifact SHA-256, predecessor
+study와 함께 재현/불확실/비재현 결론을 기록합니다.
+
 The human execution evidence stays with the source experiment rather than
 being duplicated into this evaluation repository. The Vision Language
 Workbench canonical result directories preserve the Colab screenshots for the
@@ -249,11 +263,20 @@ first study and the harder v2 run, including A100 selection, active execution,
 three-seed validation/result packaging, and final runtime deletion. This repo
 keeps the derived calibration, OOD, paired-statistics, and decision artifacts.
 
+사람이 직접 확인할 수 있는 Colab 실행 캡처는 source experiment인 Vision
+Language Workbench에 보존하고 이 평가 repo에는 중복하지 않습니다. 이 repo는
+derived calibration, OOD, paired-statistics, decision artifact만 보관합니다.
+
 The v2 result is especially useful because it distinguishes a one-run effect
 from a repeatable direction: Base's clean retrieval advantage and LoRA's
 calibration improvement replicated, while the v1 hard-negative clean recovery
 did not. This is why the evaluation layer is treated as part of the experiment,
 not as a presentation-only post-processing step.
+
+v2의 핵심 가치는 single-run effect와 반복되는 방향을 구분했다는 점입니다.
+Base의 clean retrieval 우위와 LoRA calibration 개선은 재현됐지만 v1의
+hard-negative clean recovery는 재현되지 않았습니다. 따라서 evaluation layer는
+presentation용 후처리가 아니라 실험 자체의 일부로 다룹니다.
 
 ### Harder multi-seed v2 / 더 어려운 3-seed 재현 평가
 
@@ -297,8 +320,16 @@ embedding clusters: two persistent within-`dog` caption confusions and one
 `person` confusion introduced by both LoRA ranks. This also explains why the
 class probe remains perfect while exact-pair retrieval is not.
 
+80-way retrieval에서는 모델들이 강하게 under-confident했습니다. LoRA는 ECE와
+NLL을 낮추지만 top-1 pair error가 하나 늘어 calibration 개선과 retrieval
+regression이 동시에 나타났습니다. Failure cluster는 반복되는 dog caption 혼동과
+LoRA에서 새로 나타난 person confusion을 분리해 보여줍니다.
+
 The exact saved adapters were also evaluated over Gaussian blur/noise, JPEG,
 low light, and occlusion at severity 1–3. The integrated scorecard is:
+
+저장된 adapter는 Gaussian blur/noise, JPEG, low light, occlusion severity 1–3에
+대해서도 추가 평가했고, 아래 integrated scorecard로 통합했습니다.
 
 | Variant | Params % | Clean R@1 | Mean OOD R@1 | OOD retention | ECE | Correctness NLL | CKA | Probe |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -313,13 +344,23 @@ mined negatives recover most of the clean/OOD gap while retaining some of the
 calibration improvement. Severity-3 occlusion is the worst condition for every
 variant.
 
+Base는 absolute clean과 mean OOD R@1에서 가장 높습니다. Ordinary LoRA는 더
+낮은 clean score에서 시작하면서 relative OOD retention과 calibration을
+개선했고, mined negative는 clean/OOD gap 일부를 회복했습니다. 모든 variant에서
+severity-3 occlusion이 가장 어려운 조건이었습니다.
+
 The measured reports and failure inputs are stored under
 [`results/canonical-blip-coco-small-v1`](results/canonical-blip-coco-small-v1).
+
+실측 report와 failure input은 첫 canonical result directory에 보존되어 있습니다.
 
 ## Calibration and uncertainty / Calibration·불확실성
 
 For models or adapters that expose answer confidence, store predictions as
 JSONL using either a direct correctness confidence:
+
+Answer confidence를 제공하는 모델이나 adapter는 prediction을 direct correctness
+confidence 또는 class probability vector 형태의 JSONL로 저장할 수 있습니다.
 
 ```json
 {"confidence":0.91,"correct":true}
@@ -344,9 +385,17 @@ reliability bins, area under the risk-coverage curve (AURC), and selective
 accuracy at multiple coverage levels. This separates raw benchmark accuracy
 from whether a multimodal model knows when it is likely to be wrong.
 
+리포트는 expected/adaptive/max calibration error(ECE), Brier score, negative log
+likelihood, normalized predictive entropy, error sample confidence, reliability
+bin, AURC, 여러 coverage level의 selective accuracy를 계산합니다. 이를 통해 단순
+benchmark accuracy와 모델이 자신의 오류 가능성을 얼마나 잘 인식하는지를
+분리해서 볼 수 있습니다.
+
 ### Post-hoc temperature scaling / 사후 temperature scaling
 
 On a **held-out calibration split**, save classifier scores as logits:
+
+**Held-out calibration split**에서는 classifier score를 logits로 저장합니다.
 
 ```json
 {"logits":[3.2,0.7,-1.1],"target":0}
@@ -354,6 +403,8 @@ On a **held-out calibration split**, save classifier scores as logits:
 ```
 
 Fit a single positive temperature by minimizing multiclass NLL:
+
+Multiclass NLL을 최소화하도록 하나의 positive temperature를 fitting합니다.
 
 ```bash
 mm-eval-workbench temperature-scale artifacts/calibration-logits.jsonl \
@@ -365,11 +416,19 @@ temperature and changes in NLL, ECE, and Brier score. The optimizer is a small
 bounded one-dimensional search, so it adds no training-framework dependency and
 does not retrain the underlying multimodal model.
 
+명령은 scaling 전후 calibration metric, fitted temperature, NLL/ECE/Brier 변화량을
+보고합니다. Optimizer는 bounded one-dimensional search이므로 별도 training
+framework dependency를 추가하지 않고 underlying multimodal model도 재학습하지
+않습니다.
+
 ## OOD / corruption robustness / OOD·corruption 강건성
 
 Once the same suite has been evaluated on clean and shifted inputs, aggregate
 the degradation using the same task/metric direction definitions already used
 by regression gates:
+
+동일 suite를 clean input과 shifted input에서 평가한 뒤 regression gate와 동일한
+task/metric direction 정의를 사용해 degradation을 집계합니다.
 
 ```bash
 mm-eval-workbench robustness clean.json \
@@ -384,12 +443,29 @@ worst corruption, per-condition mean/worst regression, and overall worst-case
 robustness. This keeps clean accuracy separate from distribution-shift
 reliability and is ready to consume future corruption-generated benchmark runs.
 
+Profile은 metric별 absolute/relative regression, retention, worst corruption,
+condition별 mean/worst regression, 전체 worst-case robustness를 보고합니다. 이를
+통해 clean accuracy와 distribution-shift reliability를 분리해서 평가할 수
+있습니다.
+
 The workbench does not duplicate benchmark scoring logic; it only orchestrates
 and summarizes the evaluator that is already bundled in this repository.
 
 The underlying evaluator remains `lmms_eval` and its existing task/model code.
 
+이 워크벤치는 benchmark scoring logic을 다시 구현하지 않고 포함된 evaluator를
+orchestration하고 결과를 요약합니다. 실제 평가 엔진은 기존 `lmms_eval` task/model
+code를 그대로 사용합니다.
+
 ## Architecture / 아키텍처
+
+The repository keeps lmms-eval as the execution engine while the added
+workbench layer owns suite planning, provenance, post-hoc analysis, and decision
+reporting.
+
+이 저장소는 lmms-eval을 실제 execution engine으로 유지하고, 추가된 workbench
+계층이 suite planning, provenance, post-hoc analysis, decision reporting을
+담당합니다.
 
 ```text
 lmms_eval/             Original evaluator, tasks, model adapters, CLI and TUI
@@ -398,9 +474,3 @@ examples/              Existing usage examples
 eval_workbench/        Oosu suite planning, provenance and reporting layer
 suites/                Reusable benchmark suite manifests
 ```
-
-## Origin and licensing / 출처 및 라이선스
-
-This repository was created from a clean source snapshot rather than a fork and
-contains no upstream Git history. The bundled lmms-eval code remains under its
-MIT license. See `LICENSE` and `THIRD_PARTY_NOTICE.md`.
